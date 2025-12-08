@@ -252,7 +252,7 @@ app.put("/offboarding/offboarding/editoffboarding", (req, res) => {
     const edit = req.body.editcomment
     const status = req.body["select-option"]
 
-    insert_query = "UPDATE offboarding_form SET edit=$1, status=$2 WHERE id= $3 "
+    const insert_query = "UPDATE offboarding_form SET edit=$1, status=$2 WHERE id= $3 "
     pool.query(insert_query, [edit, status, id], (err, result) => {
         if(err){
             console.log(err)
