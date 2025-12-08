@@ -17,9 +17,6 @@ app.use(cors())
 pool.connect().then(() => console.log("connected"))
 
 
-
-
-
 app.post("/sendusername/:name", (req,res) => {
     const {name} = req.params
     console.log(name)
@@ -44,6 +41,7 @@ app.get("/user/:name", (req, res) => {
 
 
 
+
 // Daten editieren von der form
 app.put("/editdata", (req, res) => {
     console.log(req.body)
@@ -55,7 +53,7 @@ app.put("/editdata", (req, res) => {
     const edit = req.body.editcomment
     const status = req.body["select-option"]
 
-    insert_query = "UPDATE mitarbeiter_form SET edit=$1, status=$2 WHERE id=$3" 
+    const insert_query = "UPDATE mitarbeiter_form SET edit=$1, status=$2 WHERE id=$3" 
     pool.query(insert_query, [edit, status, id], (err, result) => {
         if(err) {
             console.log(err)
