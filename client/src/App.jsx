@@ -17,9 +17,9 @@ function App() {
     <div className="main-header">
       <Navbar/>
       <Routes>
-        <Route path="/" element={<Onboarding_Form_Main/>}></Route>
+        <Route path="/onboarding" element={<Onboarding_Form_Main/>}></Route>
         <Route path="/offboarding" element={<Offboarding_main/>}/>
-        <Route path="/user/:userId" element={<Onboarding_form/>} />
+        <Route path="/onboarding/user/:userId" element={<Onboarding_form/>} />
         <Route path="/offboarding/user/:userId" element={<Offboarding_form/>} />
         <Route path="/component" element={<Onboarding_form/>}/>
       </Routes>

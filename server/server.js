@@ -1,7 +1,14 @@
+// requires import when type: "module"
+// when not the case "require"
 import pool from './db.js';
 import dotenv from "dotenv";
 import  cors from "cors"
 import express from "express"
+
+
+//for next project
+// improving routing
+// integrating middleware
 
 dotenv.config();
 const PORT = process.env.PORT || 3005
@@ -25,7 +32,7 @@ app.post("/sendusername/:name", (req,res) => {
 
 
 // Daten ziehen für die form
-app.get("/user/:name", (req, res) => {
+app.get("/onboarding/user/:name", (req, res) => {
     const name = req.params.name
     console.log(name)
     const fetch_query = "SELECT * FROM mitarbeiter_form WHERE arbeiter_name=$1 ORDER BY id" 
@@ -43,7 +50,7 @@ app.get("/user/:name", (req, res) => {
 
 
 // Daten editieren von der form
-app.put("/editdata", (req, res) => {
+app.put("/onboarding/editdata", (req, res) => {
     console.log(req.body)
     console.log(req.body.id)
     console.log(req.body.username)
@@ -67,7 +74,7 @@ app.put("/editdata", (req, res) => {
 
 
 // speichert die Mitarbeiter
-app.post('/postData', async (req, res) => {
+app.post('/onboarding/postData', async (req, res) => {
     const name = req.body.name
     console.log(name)
     console.log('posting the acutal name request')
@@ -95,7 +102,7 @@ app.post('/postData', async (req, res) => {
 })
 
 // fetched die ganzen Mitarbeiter
-app.get("/fetchData", (req, res) => {
+app.get("/onboarding/fetchData", (req, res) => {
     try{
         const fetch_query ="SELECT * FROM mitarbeiter_name"
         pool.query(fetch_query,(err,result) => {
@@ -114,7 +121,7 @@ app.get("/fetchData", (req, res) => {
 })
 
 // löscht Mitarbeiter funktioniert
-app.delete("/delete/:name", async (req, res) => {
+app.delete("/onboarding/delete/:name", async (req, res) => {
     const name = req.params.name
     delete_firstdatabase()
     delete_seconddatabase()

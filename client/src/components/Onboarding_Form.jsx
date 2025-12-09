@@ -11,7 +11,7 @@ function Onboarding_form() {
     
     async function sendFormData (formData) {
 
-        await fetch(`${API_URL}/editdata`, {
+        await fetch(`${API_URL}/onboarding/editdata`, {
             method: "PUT",
             headers: {
                 "Content-Type":"application/json"
@@ -62,7 +62,7 @@ function Onboarding_form() {
     useEffect(() => {
         const dataFetch = async() => {
             const data = await (
-                await fetch(`${API_URL}/user/`+url)
+                await fetch(`${API_URL}/onboarding/user/`+url)
             ).json()
             console.log(data)
             setData(data)

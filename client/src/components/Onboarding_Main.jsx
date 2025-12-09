@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import ToDoItem from "./ToDoItem.jsx"
 import ToDoItem_2 from "./ToDoItem_2.jsx"
 import {useNavigate} from "react-router-dom"
@@ -18,7 +17,7 @@ function Onboarding_Form_Main() {
             setTasks([...tasks, newTask])
             setNewTask("")
             
-            await fetch(`${API_URL}/postData` , {
+            await fetch(`${API_URL}/onboarding/postData` , {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -34,7 +33,7 @@ function Onboarding_Form_Main() {
 
      async function remove_task_1(taskToRemove) {
 
-        await fetch(`${API_URL}/delete/`+ taskToRemove, {
+        await fetch(`${API_URL}/onboarding/delete/`+ taskToRemove, {
         method:"DELETE",
         headers: {
             "Content-Type":"application/json"
@@ -57,7 +56,7 @@ function Onboarding_Form_Main() {
 
     function handlepage(task){
      
-        window.location.href = `/user/${task}`  
+        window.location.href = `/onboarding/user/${task}`  
 }
 
     const [state, setState] = useState([""]);
@@ -66,7 +65,7 @@ function Onboarding_Form_Main() {
 
         const dataFetch = async () => {
             const data = await (
-                await fetch(`${API_URL}/fetchData`)
+                await fetch(`${API_URL}/onboarding/fetchData`)
             ).json()
             console.log(data)
             setState(data)
