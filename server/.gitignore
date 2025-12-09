@@ -9,11 +9,13 @@ lerna-debug.log*
 
 node_modules
 /node_modules
+
 dist
 dist-ssr
 *.local
 .env
-
+/node_modules/function-bind/.nycrc
+.nycrc
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
