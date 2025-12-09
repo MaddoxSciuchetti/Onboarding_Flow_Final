@@ -8,7 +8,9 @@ export const Navbar = () => {
     return (
         <nav>
             <ul>
+               
                 <li><NavLink to="/onboarding">Onboarding</NavLink></li>
+                <li><NavLink to="/">Zuhause</NavLink></li>
                 <li><NavLink to="/offboarding">Offboarding</NavLink></li>
             </ul>
         </nav>

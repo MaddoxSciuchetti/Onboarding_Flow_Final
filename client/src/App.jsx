@@ -5,6 +5,7 @@ import Offboarding_main from "./components/Offboarding_main"
 import Offboarding_form from "./components/Offboarding_form"
 import Onboarding_form from './components/Onboarding_Form';
 import { Navbar } from './components/Navbar';
+import { Home } from './components/Home';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <div className="main-header">
       <Navbar/>
       <Routes>
+        <Route path="/" element={<Home/>}></Route>
         <Route path="/onboarding" element={<Onboarding_Form_Main/>}></Route>
         <Route path="/offboarding" element={<Offboarding_main/>}/>
         <Route path="/onboarding/user/:userId" element={<Onboarding_form/>} />
