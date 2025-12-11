@@ -157,7 +157,15 @@ app.delete("/onboarding/delete/:name", async (req, res) => {
 
     }
 
-    res.send("sucess")
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    res.set('ETag', ''); // Disable ETag if enabled
+
+
+
+
+    res.status(200)
 })
 
 // offboarding only name and creating 
