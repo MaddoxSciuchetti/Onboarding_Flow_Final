@@ -32,7 +32,7 @@ function Offboarding_main() {
         await fetch(`${API_URL}/offboarding/onboardingname/delete/` + taskToRemove, {
             method: "DELETE",
             headers: {
-                'Cache-Control': 'no-cache'
+                'Content-Type': "application/json"
             },
         }).then((response) => console.log(response))
     }
