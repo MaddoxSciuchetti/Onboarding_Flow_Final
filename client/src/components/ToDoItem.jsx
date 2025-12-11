@@ -9,18 +9,18 @@ function ToDoItem({item, toggle, gotopage}) {
     return (
         <div className="item-wrapper">
             <div className="items">
-                <div className="itum name">
+                <div className="text-todo itum">
                     <span>{item}</span>
                 </div>
-                <div className="itum arrow btn">
-                     <GoArrowUpRight  onClick={() => gotopage(item)}/>
+                <div className="icons">
+                    <div className="itum arrow btn">
+                        <GoArrowUpRight  onClick={() => gotopage(item)}/>
+                    </div>
+                    <div className="itum btn">
+                        <MdDelete onClick={() => toggle()}/>
+                    </div>
                 </div>
-                <div className="itum btn">
-                    <MdDelete onClick={() => toggle()}/>
-                </div>
-                {/*<span className="actions"></span>*/}
             </div>
-
         </div>
     )
 }

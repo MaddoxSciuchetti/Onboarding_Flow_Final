@@ -29,14 +29,16 @@ function ToDoItem_2({ item, gotopage, onRemove}) {
 
         <div className="item-wrapper">
             <div className="items">
-                <div className="itum">
+                <div className="text-todo itum">
                     <span>{item}</span>
                 </div>
-                <div className="itum arrow btn">
-                    <GoArrowUpRight  onClick={() => gotopage(item)}/>
-                </div>
-                <div className="itum btn">
-                    <MdDelete onClick={() => toggleModal()}/>
+                <div className="icons">
+                    <div className="itum arrow btn">
+                        <GoArrowUpRight  onClick={() => gotopage(item)}/>
+                    </div>
+                    <div className="itum btn">
+                        <MdDelete onClick={() => toggleModal()}/>
+                    </div>
                 </div>
             </div>
 

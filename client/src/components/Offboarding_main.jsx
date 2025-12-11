@@ -78,22 +78,24 @@ function Offboarding_main() {
                 </div> : null
             }
         </div>
-            <div className="list-container">
+            <div className="main-list">
                 <div className="list">
-                    <div className="sublist-1">
-                        <div className="sublist-2">
-                            <button className="table-1 btn" onClick={handleSubmit}>Add</button>
-                            <input className="table-1 input-box"
-                            id="1"
-                            type="text"
-                            value={newTask}
-                            onChange={((e) => setNewTask(e.target.value))}
-                            placeholder="Name"/>
-                        </div>
+              
+                    <div className="sublist-2">
+                        
+                        <input className="table-1 input-box"
+                        id="1"
+                        type="text"
+                        value={newTask}
+                        onChange={((e) => setNewTask(e.target.value))}
+                        placeholder="Name"/>
 
-                        {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))}
-                        {tasks && tasks.map((task, key) => (<ToDoItem key={key} item={task} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage} />))}
+                        <button className="table-1 btn" onClick={handleSubmit}>Add</button>
                     </div>
+
+                    {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))}
+                    {tasks && tasks.map((task, key) => (<ToDoItem key={key} item={task} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage} />))}
+        
                 </div>
             </div>
         </>
