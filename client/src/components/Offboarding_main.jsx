@@ -32,7 +32,7 @@ function Offboarding_main() {
         await fetch(`${API_URL}/offboarding/onboardingname/delete/` + taskToRemove, {
             method: "DELETE",
             headers: {
-                "Content-Type":"application/json"
+                'Cache-Control': 'no-cache'
             },
         }).then((response) => console.log(response))
     }
@@ -94,8 +94,8 @@ function Offboarding_main() {
                         <button className="table-1 btn" onClick={handleSubmit}>Hinzufügen</button>
                     </div>
 
-                    {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))}
                     {tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage} />))}
+                    {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))}
         
                 </div>
             </div>
