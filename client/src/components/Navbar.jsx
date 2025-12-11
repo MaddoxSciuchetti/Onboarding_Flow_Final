@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom"
 import {NavLink} from "react-router-dom"
 import "./Navbar.css"
+import bsb from "../assets/bsb.png"
 
 export const Navbar = () => {
 
@@ -9,9 +10,9 @@ export const Navbar = () => {
         <nav>
             <ul>
                
-                <li><NavLink to="/onboarding">Onboarding</NavLink></li>
-                <li><NavLink to="/">Zuhause</NavLink></li>
-                <li><NavLink to="/offboarding">Offboarding</NavLink></li>
+                <li><NavLink to="/onboarding"><strong>Onboarding</strong></NavLink></li>
+                <li><NavLink to="/"><img class="image-navbar"src={bsb} alt="not shown "></img></NavLink></li>
+                <li><NavLink to="/offboarding"><strong>Offboarding</strong></NavLink></li>
             </ul>
         </nav>
     )
