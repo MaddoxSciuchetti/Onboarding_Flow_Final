@@ -29,9 +29,6 @@ function Onboarding_Form_Main() {
             .then((response) => console.log(response)) 
         }
     }
-    
-
-
      async function remove_task_1(taskToRemove) {
 
         await fetch(`${API_URL}/onboarding/delete/`+ taskToRemove, {
@@ -40,18 +37,12 @@ function Onboarding_Form_Main() {
             "Content-Type":"application/json"
         },
         }).then((response) => console.log(response))
-
     }
-
     function removeTask(taskToRemove) {
         setTasks(tasks.filter((task) => task !== taskToRemove ));
         remove_task_1(taskToRemove)
         window.location.reload();
     }
-
-    const [modalOpen, setModalOpen] = useState(false);
-
-
 
     function handlepage(task){
      
@@ -76,38 +67,35 @@ function Onboarding_Form_Main() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-
     return (
         <>
-        <div>
-            {isLoading ? <div className="loading-container">
-        
-                <p className="loading-state"> Lädt...</p>
-        
-            </div> : null}
-
-        </div>
-
-        <div className="main-list">
-     
-            <div className="list">
-                
-                <div className="sublist-2">
+            <div>
+                {isLoading ? <div className="loading-container">
             
-                    <input className="table-1 input-box"
-                    id="1"
-                    type="text"
-                    value={newTask}
-                    onChange={((e) => setNewTask(e.target.value))}
-                    placeholder="Name"/>
+                    <p className="loading-state"> Lädt...</p>
+            
+                </div> : null}
 
+            </div>
 
-                    <button className="table-1 btn" onClick={handleSubmit}>Hinzufügen</button>
-                </div>
-                {  state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))}
-                {  tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} gotopage={handlepage} onRemove={removeTask} />))} 
-            </div>   
-        </div>     
+            <div className="main-list">
+                <div className="list">
+                    <div className="sublist-2">
+                
+                        <input className="table-1 input-box"
+                        id="1"
+                        type="text"
+                        value={newTask}
+                        onChange={((e) => setNewTask(e.target.value))}
+                        placeholder="Name"/>
+
+                        <button className="table-1 btn" onClick={handleSubmit}>Hinzufügen</button>
+
+                    </div>
+                    {state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))}
+                    {tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} gotopage={handlepage} onRemove={removeTask} />))} 
+                </div>   
+            </div>     
 
         </>
     )

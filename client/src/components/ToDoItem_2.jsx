@@ -7,7 +7,6 @@ import Modal from "./Modal.jsx";
 
 import "./Todo.css";
 
-
 function ToDoItem_2({ item, gotopage, onRemove}) {
 
     const [modal, setModal] = useState(false)
@@ -22,10 +21,7 @@ function ToDoItem_2({ item, gotopage, onRemove}) {
         document.body.classList.remove("active-modal")
     }
 
-
-
     return (
-
 
         <div className="item-wrapper">
             <div className="items">

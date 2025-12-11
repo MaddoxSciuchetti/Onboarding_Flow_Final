@@ -37,9 +37,9 @@ function Offboarding_main() {
     }
 
     function removeTask(taskToRemove) {
-    setTasks(tasks.filter((task) => task != taskToRemove));
-    remove_task_1(taskToRemove)
-    window.location.reload();
+        setTasks(tasks.filter((task) => task != taskToRemove));
+        remove_task_1(taskToRemove)
+        window.location.reload();
     }
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -53,6 +53,7 @@ function Offboarding_main() {
     }
 
     const [state, setState] = useState([""]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -61,13 +62,12 @@ function Offboarding_main() {
                 await fetch(`${API_URL}/offboarding/fetchoffboardingname`)
             ).json()
             console.log(data)
-            setState(data)
             setIsLoading(false);
+            setState(data)
         };
         dataFetch();
     }, [])
 
-    const [isLoading, setIsLoading] = useState(false);
 
 
     return(
