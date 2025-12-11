@@ -12,7 +12,7 @@ export const Home = () => {
 
     let greeting = "";
     if (date>=1 && date <12) {
-        greeting="Guten Morgne Timo";
+        greeting="Guten Morgen Timo";
     }else if(date>=12 && date<19){
         greeting="Guten Nachmittag Timo"
     }else {

@@ -50,14 +50,23 @@
     display: grid;
     grid-template-columns: 1fr;
     cursor: pointer;
+    color: white; 
+    border-radius: 10px;
+
+
 }
 
 .field-text text{
     text-align: center; 
+;
 }
 
-.field-text {
+
+
+.field-text select {
     cursor:pointer; 
+    border-radius: 10px;
+
 }
 
 .field-text textarea {
@@ -81,9 +90,6 @@
     cursor: pointer;
     transition-delay: 100ms;
 }
-
-
-
 
 .submit-form:active{
     background-color: green;
