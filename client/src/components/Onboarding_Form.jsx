@@ -46,6 +46,7 @@ function Onboarding_form() {
         const new_str = str[str.length -1];
         data.username = new_str
 
+
         console.log("formdata incoming", data);
 
         await sendFormData(data)
@@ -55,6 +56,7 @@ function Onboarding_form() {
     const [formattedData, setFormattedData] = useState([])
     
     const url = window.location.pathname.split("/").pop()
+    console.log(url)
 
 
     const descriptions = [
