@@ -38,11 +38,13 @@ function Onboarding_Form_Main() {
             "Content-Type":"application/json"
         },
         }).then((response) => console.log(response))
+        .then((response) => console.log(response))
     }
-    function removeTask(taskToRemove) {
-        setTasks(tasks.filter((task) => task !== taskToRemove ));
-        remove_task_1(taskToRemove)
 
+    async function removeTask(taskToRemove) {
+        setTasks(tasks.filter((task) => task !== taskToRemove ));
+        await remove_task_1(taskToRemove) 
+        console.log(taskToRemove)
     }
 
     function handlepage(task){
