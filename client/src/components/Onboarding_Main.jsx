@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 // import ToDoItem from "./ToDoItem.jsx"
 import ToDoItem_2 from "./ToDoItem_2.jsx"
-import {useNavigate} from "react-router-dom"
 import { API_URL } from "../api.js";
 
 
@@ -12,6 +11,8 @@ function Onboarding_Form_Main() {
     const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState("")
     const [state, setState] = useState([""]);
+    const [error, setError] = useState([""]);
+
 
     useEffect(() => {
 
@@ -28,6 +29,7 @@ function Onboarding_Form_Main() {
     }, [])
 
     async function handleSubmit() {
+
         if(newTask){
 
             setTasks([...tasks, newTask])
@@ -40,26 +42,32 @@ function Onboarding_Form_Main() {
                 },
                 body: JSON.stringify({"name": newTask})
             })
-            .then((response) => response.json())
             .then((response) => console.log(response)) 
         }
     }
     
-    async function remove_task_1(taskToRemove) {
-
-        await fetch(`${API_URL}/onboarding/delete/${taskToRemove}`, {
+     function remove_task_1(taskToRemove) {
+        return fetch(`${API_URL}/onboarding/delete/${taskToRemove}`, {
         method:"DELETE",
-        cache: 'no-store',
         headers: {
             "Content-Type":"application/json"
         },
-        }).then((response) => console.log(response))
+        signal: AbortSignal.timeout(5000)
+    })
     }
 
-    function removeTask(taskToRemove) {
+    async function removeTask(taskToRemove) {
+        setError("Something went wrong")
+        window.location.reload()
 
-        remove_task_1(taskToRemove) 
-        setTasks(tasks.filter((task) => task !== taskToRemove ));
+        try {
+            await remove_task_1(taskToRemove)
+            const filteredTasks = tasks.filter((task) => task !== taskToRemove)
+            setTasks(filteredTasks);
+        } catch (e) {
+            console.error(e)
+            setError("Something went wrong")
+        }
     }
 
     function handlepage(task){
@@ -96,6 +104,7 @@ function Onboarding_Form_Main() {
 
                     {state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))}
                     {tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} gotopage={handlepage} onRemove={removeTask} />))} 
+                    {error && <p>{error}</p>}
                 </div>   
             </div>     
 

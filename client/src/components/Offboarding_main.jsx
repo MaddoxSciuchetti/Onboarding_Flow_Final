@@ -62,7 +62,7 @@ function Offboarding_main() {
             const data = await (
                 await fetch(`${API_URL}/offboarding/fetchoffboardingname`)
             ).json()
-            console.log(data)
+            console.log("test", data)
             setIsLoading(false);
             setState(data)
         };

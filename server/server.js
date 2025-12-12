@@ -102,6 +102,8 @@ app.post('/onboarding/postData', async (req, res) => {
             console.log(result)
         }
     })
+
+    res.sendStatus(204)
 })
 
 // fetched die ganzen Mitarbeiter
@@ -119,6 +121,8 @@ app.get("/onboarding/fetchData", (req, res) => {
         console.error(error);
         res.send('there is currently no data')
     }
+
+
 
 
 })
@@ -160,7 +164,7 @@ app.delete("/onboarding/delete/:name", async (req, res) => {
 
     }
 
-    res.status(200)
+    res.sendStatus(204)
 })
 
 // offboarding only name and creating 
