@@ -42,6 +42,7 @@ function Onboarding_Form_Main() {
     }
 
     async function removeTask(taskToRemove) {
+
         setTasks(tasks.filter((task) => task !== taskToRemove ));
         await remove_task_1(taskToRemove) 
         console.log(taskToRemove)
