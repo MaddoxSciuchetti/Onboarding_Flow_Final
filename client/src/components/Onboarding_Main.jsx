@@ -11,6 +11,21 @@ function Onboarding_Form_Main() {
 
     const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState("")
+    const [state, setState] = useState([""]);
+
+    useEffect(() => {
+
+        const dataFetch = async () => {
+            setIsLoading(true);
+            const data = await (
+                await fetch(`${API_URL}/onboarding/fetchData`)
+            ).json()
+            console.log(data)
+            setState(data)
+            setIsLoading(false);
+        };
+        dataFetch();
+    }, [])
 
     async function handleSubmit() {
         if(newTask){
@@ -51,22 +66,6 @@ function Onboarding_Form_Main() {
         window.location.href = `/onboarding/user/${task}`  
     }
 
-    const [state, setState] = useState([""]);
-
-    useEffect(() => {
-
-        const dataFetch = async () => {
-            setIsLoading(true);
-            const data = await (
-                await fetch(`${API_URL}/onboarding/fetchData`)
-            ).json()
-            console.log(data)
-            setState(data)
-            setIsLoading(false);
-        };
-        dataFetch();
-    }, [])
-
     const [isLoading, setIsLoading] = useState(false);
 
     return (
@@ -94,6 +93,7 @@ function Onboarding_Form_Main() {
                         <button className="table-1 btn" onClick={handleSubmit}>Hinzufügen</button>
 
                     </div>
+
                     {state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))}
                     {tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} gotopage={handlepage} onRemove={removeTask} />))} 
                 </div>   
