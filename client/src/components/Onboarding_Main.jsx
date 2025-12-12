@@ -29,7 +29,8 @@ function Onboarding_Form_Main() {
             .then((response) => console.log(response)) 
         }
     }
-     async function remove_task_1(taskToRemove) {
+    
+    async function remove_task_1(taskToRemove) {
 
         await fetch(`${API_URL}/onboarding/delete/${taskToRemove}`, {
         method:"DELETE",
@@ -38,20 +39,17 @@ function Onboarding_Form_Main() {
             "Content-Type":"application/json"
         },
         }).then((response) => console.log(response))
-        .then((response) => console.log(response))
     }
 
-    async function removeTask(taskToRemove) {
+    function removeTask(taskToRemove) {
 
+        remove_task_1(taskToRemove) 
         setTasks(tasks.filter((task) => task !== taskToRemove ));
-        await remove_task_1(taskToRemove) 
-        console.log(taskToRemove)
     }
 
     function handlepage(task){
-     
         window.location.href = `/onboarding/user/${task}`  
-}
+    }
 
     const [state, setState] = useState([""]);
 
