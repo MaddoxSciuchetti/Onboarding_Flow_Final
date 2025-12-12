@@ -71,14 +71,14 @@ function Onboarding_Form_Main() {
 
     return (
         <>
-            <div>
+            {/* <div>
                 {isLoading ? <div className="loading-container">
             
                     <p className="loading-state"> Lädt...</p>
             
                 </div> : null}
 
-            </div>
+            </div> */}
 
             <div className="main-list">
                 <div className="list">
