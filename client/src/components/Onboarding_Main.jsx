@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import ToDoItem from "./ToDoItem.jsx"
 import ToDoItem_2 from "./ToDoItem_2.jsx"
 import { API_URL } from "../api.js";
+import { MdOutlineFamilyRestroom } from "react-icons/md";
 
 
 
@@ -10,7 +11,7 @@ function Onboarding_Form_Main() {
 
     const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState("")
-    const [state, setState] = useState([""]);
+    // const [state, setState] = useState([""]);
     const [error, setError] = useState([""]);
 
 
@@ -22,7 +23,18 @@ function Onboarding_Form_Main() {
                 await fetch(`${API_URL}/onboarding/fetchData`)
             ).json()
             console.log(data)
-            setState(data)
+            const formattedData = data.map((input, i) => {
+                return {
+                    description: i,
+                    input: {
+                        id: input.id, 
+                        name: input["name"]
+                    }
+                }
+            })
+
+            console.log("formatteddata", formattedData )
+            setTasks(formattedData)
             setIsLoading(false);
         };
         dataFetch();
@@ -32,7 +44,11 @@ function Onboarding_Form_Main() {
 
         if(newTask){
 
-            setTasks([...tasks, newTask])
+            setTasks([...tasks, {
+                input: {
+                    "name": newTask 
+                }
+            }])
             setNewTask("")
             
             await fetch(`${API_URL}/onboarding/postData` , {
@@ -58,11 +74,11 @@ function Onboarding_Form_Main() {
 
     async function removeTask(taskToRemove) {
         setError("Something went wrong")
-        window.location.reload()
+
 
         try {
             await remove_task_1(taskToRemove)
-            const filteredTasks = tasks.filter((task) => task !== taskToRemove)
+            const filteredTasks = tasks.filter((task) => task.input["name"] !== taskToRemove)
             setTasks(filteredTasks);
         } catch (e) {
             console.error(e)
@@ -102,8 +118,8 @@ function Onboarding_Form_Main() {
 
                     </div>
 
-                    {state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))}
-                    {tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} gotopage={handlepage} onRemove={removeTask} />))} 
+                    {/* {state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))} */}
+                    {tasks?.map((task, key) => (<ToDoItem_2 key={key} item={task.input.name} gotopage={handlepage} onRemove={removeTask} />))} 
                     {error && <p>{error}</p>}
                 </div>   
             </div>     

@@ -115,12 +115,15 @@ app.get("/onboarding/fetchData", (req, res) => {
                 res.send(err)
             }else{
                 res.send(result.rows)
+
             }
         })
     } catch(error) {
         console.error(error);
         res.send('there is currently no data')
     }
+
+    
 
 
 
