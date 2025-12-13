@@ -11,7 +11,7 @@ function Offboarding_main() {
     const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState("")
     // const [state, setState] = useState([""]);
-    const [error , setError] = useState([""]);
+    // const [error , setError] = useState([""]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ function Offboarding_main() {
     }
 
     async function removeTask(taskToRemove) {
-        setError("Something")
+        // setError("Something")
 
 
         try{
@@ -78,7 +78,7 @@ function Offboarding_main() {
             setTasks(filteredTasks);
         } catch(e) {
             console.error(e)
-            setError("something went wrong")
+            // setError("something went wrong")
         }
         // setTasks(tasks.filter((task) => task != taskToRemove));
         // remove_task_1(taskToRemove)
@@ -120,7 +120,7 @@ function Offboarding_main() {
 
                     {tasks?.map((task, key) => (<ToDoItem_2 key={key} item={task.input.name} onRemove={removeTask} gotopage={handlepage} />))}
                     {/* {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))} */}
-                    {error && <p>{error}</p>}
+                    {/* {error && <p>{error}</p>} */}
                 </div>
             </div>
         </>
