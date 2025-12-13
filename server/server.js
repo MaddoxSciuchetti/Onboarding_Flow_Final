@@ -246,6 +246,8 @@ app.delete("/offboarding/onboardingname/delete/:name", (req, res) => {
 
         await delete_firstdatabase_of()
     }
+
+    res.sendStatus(204)
 })
 
 // offboarding including the form

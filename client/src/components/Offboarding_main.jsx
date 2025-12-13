@@ -10,20 +10,50 @@ function Offboarding_main() {
 
     const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState("")
+    // const [state, setState] = useState([""]);
+    const [error , setError] = useState([""]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const dataFetch = async () => {
+            setIsLoading(true);
+            const data = await (
+                await fetch(`${API_URL}/offboarding/fetchoffboardingname`)
+            ).json()
+            console.log("test", data)
+            const formattedData = data.map((input , i ) => {
+                return {
+                    description: i, 
+                    input: {
+                        id: input.id,
+                        name: input["name"]
+                    }
+                }
+            })
+            setTasks(formattedData)
+            setIsLoading(false);
+            
+        };
+        dataFetch();
+    }, [])
+
 
     async function handleSubmit() {
         if(newTask){
-            setTasks([...tasks, newTask])
-            setNewTask("")
-            await fetch(`${API_URL}/offboarding/postonboardingdata`, {
-                method: "POST",
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify({"name": newTask})
-            })
-            .then((response) => response.json())
-            .then((response) => console.log(response))
+            setTasks([...tasks, {
+                input: {
+                    "name": newTask
+                }
+        }])
+        setNewTask("")
+        await fetch(`${API_URL}/offboarding/postonboardingdata`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({"name": newTask})
+        })
+        .then((response) => console.log(response))
 
         }
     }
@@ -34,42 +64,36 @@ function Offboarding_main() {
             headers: {
                 'Content-Type': "application/json"
             },
-        }).then((response) => console.log(response))
+            signal: AbortSignal.timeout(5000)
+        })
     }
 
-    function removeTask(taskToRemove) {
-        setTasks(tasks.filter((task) => task != taskToRemove));
-        remove_task_1(taskToRemove)
-        window.location.reload();
+    async function removeTask(taskToRemove) {
+        setError("Something")
+
+
+        try{
+            await remove_task_1(taskToRemove)
+            const filteredTasks = tasks.filter((task) => task.input["name"] !== taskToRemove)
+            setTasks(filteredTasks);
+        } catch(e) {
+            console.error(e)
+            setError("something went wrong")
+        }
+        // setTasks(tasks.filter((task) => task != taskToRemove));
+        // remove_task_1(taskToRemove)
+        // window.location.reload();
     }
 
-    const [modalOpen, setModalOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
 
-    const handleEditRow = () => {
-        setModalOpen(true)
-    }
+    // const handleEditRow = () => {
+    //     setModalOpen(true)
+    // }
 
     function handlepage(task) {
         window.location.href = `/offboarding/user/${task}`
     }
-
-    const [state, setState] = useState([""]);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        const dataFetch = async () => {
-            setIsLoading(true);
-            const data = await (
-                await fetch(`${API_URL}/offboarding/fetchoffboardingname`)
-            ).json()
-            console.log("test", data)
-            setIsLoading(false);
-            setState(data)
-        };
-        dataFetch();
-    }, [])
-
-
 
     return(
         <><div>
@@ -94,9 +118,9 @@ function Offboarding_main() {
                         <button className="table-1 btn" onClick={handleSubmit}>Hinzufügen</button>
                     </div>
 
-                    {tasks && tasks.map((task, key) => (<ToDoItem_2 key={key} item={task} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage} />))}
-                    {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))}
-        
+                    {tasks?.map((task, key) => (<ToDoItem_2 key={key} item={task.input.name} onRemove={removeTask} gotopage={handlepage} />))}
+                    {/* {state && state.map((value, key ) => (<ToDoItem_2 key={key} item={value.name} onRemove={removeTask} editRow={handleEditRow} gotopage={handlepage}/>))} */}
+                    {error && <p>{error}</p>}
                 </div>
             </div>
         </>
