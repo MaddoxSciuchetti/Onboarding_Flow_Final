@@ -23,6 +23,7 @@ function Onboarding_Form_Main() {
                 await fetch(`${API_URL}/onboarding/fetchData`)
             ).json()
             console.log(data)
+            // formatting data is important
             const formattedData = data.map((input, i) => {
                 return {
                     description: i,
@@ -73,7 +74,7 @@ function Onboarding_Form_Main() {
     }
 
     async function removeTask(taskToRemove) {
-        setError("Something went wrong")
+        // setError("Something went wrong")
 
 
         try {
@@ -82,7 +83,7 @@ function Onboarding_Form_Main() {
             setTasks(filteredTasks);
         } catch (e) {
             console.error(e)
-            setError("Something went wrong")
+            // setError("Something went wrong")
         }
     }
 
@@ -120,7 +121,7 @@ function Onboarding_Form_Main() {
 
                     {/* {state && state.map((value, key) => (<ToDoItem_2 key={key} item={value.name} gotopage={handlepage} onRemove={removeTask}/>))} */}
                     {tasks?.map((task, key) => (<ToDoItem_2 key={key} item={task.input.name} gotopage={handlepage} onRemove={removeTask} />))} 
-                    {error && <p>{error}</p>}
+                    {/* {error && <p>{error}</p>} */}
                 </div>   
             </div>     
 
